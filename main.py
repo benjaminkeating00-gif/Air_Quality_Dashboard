@@ -16,7 +16,7 @@ i = 0
 humidity_data = []
 temp_data = []
 timestamps = []
-while i<50:
+while i<10:
     data = arduino.readline().decode('utf-8').strip()
     if "Hum:" in data:
         print(data)
