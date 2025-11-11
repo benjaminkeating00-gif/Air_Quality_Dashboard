@@ -14,15 +14,21 @@ def Celcius_to_Fahrenheit(c):
 # Make data folder
 os.makedirs('./data', exist_ok=True)
 
-i = 0
+
 humidity_data = []
 temp_data = []
 timestamps = []
 first_write = True
 
 while True:
+    # Clear any old data in the buffer
+    arduino.flushInput()
+    
+    # Wait for fresh data from Arduino
     data = arduino.readline().decode('utf-8').strip()
+    
     if "Hum:" in data:
+        print('Processing sensor data')
         print(data)
         # Extract humidity value
         h = data.split("Hum: ")[1].split(" %")[0]
@@ -40,8 +46,10 @@ while True:
             temp_f = Celcius_to_Fahrenheit(float(t))
             f.write(f"{dt.datetime.now().isoformat()},{t},{h}\n")
             print(f"Saved: {t}°C ({temp_f:.1f}°F), {h}% humidity")
-
-    time.sleep(2)  # 2 seconds
+        
+        # Sleep after processing data
+        time.sleep(2)
+        continue  # Go back to start of while loop
     
-
-print(f"Collected {len(humidity_data)} readings!")
+    # Small delay when no data found
+    time.sleep(0.1)
