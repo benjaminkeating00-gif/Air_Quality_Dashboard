@@ -11,11 +11,11 @@ void setup() {
   
   // Clear screen and show test message
   lcd.clear();
-  lcd.print("LCD Test");
+  lcd.print("Hop On Apex");
   
   // Move to second line
   lcd.setCursor(0, 1);
-  lcd.print("Working!");
+  lcd.print("Brand & Mr.K");
 }
 
 void loop() {

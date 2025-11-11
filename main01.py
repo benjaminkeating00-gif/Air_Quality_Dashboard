@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 arduino = serial.Serial('COM3', 9600)
 time.sleep(2)
 
+def Celcius_to_Fahrenheit(c):
+    return (c * 9/5) + 32
 
 i = 0
 humidity_data = []
